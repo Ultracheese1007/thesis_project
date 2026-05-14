@@ -1,0 +1,124 @@
+{
+  "project_name": "thesis_project_daily",
+  "version": "final_rq_aligned_daily_spec_v1",
+  "frequency": "daily",
+  "observation_unit": "one trading day",
+  "date_column": "date",
+  "target": {
+    "name": "nasdaq_return",
+    "definition": "Daily log return of the NASDAQ-100 index",
+    "forecast_timing": "Predict return at day t using predictors available up to day t-1"
+  },
+  "predictors": {
+    "dgs10_lag1": {
+      "family": "macro",
+      "definition": "10-year U.S. Treasury yield lagged by one trading day",
+      "source": "FRED DGS10",
+      "lag_days": 1
+    },
+    "vix_lag1": {
+      "family": "macro",
+      "definition": "CBOE Volatility Index lagged by one trading day",
+      "source": "FRED VIXCLS",
+      "lag_days": 1
+    },
+    "sentiment_mean_lag1": {
+      "family": "sentiment",
+      "definition": "Daily mean institutional sentiment lagged by one trading day",
+      "source": "Daily FinBERT aggregation",
+      "lag_days": 1,
+      "raw_column_before_lag": "sentiment_mean",
+      "interpretation": "Sentiment direction"
+    },
+    "sentiment_std_lag1": {
+      "family": "sentiment",
+      "definition": "Daily sentiment standard deviation lagged by one trading day",
+      "source": "Daily FinBERT aggregation",
+      "lag_days": 1,
+      "raw_column_before_lag": "sentiment_std",
+      "interpretation": "Sentiment dispersion or disagreement"
+    },
+    "sentiment_extreme_lag1": {
+      "family": "sentiment",
+      "definition": "Daily extreme sentiment share/proportion lagged by one trading day",
+      "source": "Daily FinBERT aggregation",
+      "lag_days": 1,
+      "raw_column_before_lag": "sentiment_extreme",
+      "interpretation": "Share of highly positive or highly negative news sentiment"
+    }
+  },
+  "primary_feature_settings": {
+    "macro_only": [
+      "dgs10_lag1",
+      "vix_lag1"
+    ],
+    "sentiment_mean_only": [
+      "sentiment_mean_lag1"
+    ],
+    "sentiment_std_only": [
+      "sentiment_std_lag1"
+    ],
+    "sentiment_extreme_only": [
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1"
+    ],
+    "macro_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_mean_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_extreme_lag1"
+    ]
+  },
+  "rq_role_mapping": {
+    "macro_only": "RQ1_macro_baseline",
+    "sentiment_mean_only": "RQ2_standalone_sentiment_direction",
+    "sentiment_std_only": "RQ2_standalone_sentiment_dispersion",
+    "sentiment_extreme_only": "RQ2_standalone_extreme_sentiment_share",
+    "macro_mean": "RQ3_incremental_sentiment_direction_beyond_macro",
+    "macro_std": "RQ3_incremental_sentiment_dispersion_beyond_macro",
+    "macro_extreme": "RQ3_incremental_extreme_sentiment_beyond_macro",
+    "macro_mean_std": "RQ3_incremental_direction_and_dispersion_beyond_macro",
+    "macro_mean_extreme": "RQ3_incremental_direction_and_extreme_sentiment_beyond_macro"
+  },
+  "feature_design_rationale": {
+    "main_design": "The final empirical design uses nine RQ-aligned feature specifications. This separates the macro baseline, standalone sentiment representations, and macro-sentiment combinations used to evaluate incremental predictive value.",
+    "why_no_single_full_combined_primary_specification": "The thesis does not use one single full combined specification as the primary design because the goal is to isolate the predictive role of different sentiment representations. In particular, sentiment_std_lag1 and sentiment_extreme_lag1 are conceptually related and empirically highly correlated, so separating them improves interpretability, especially for the linear baseline. The macro_mean_std and macro_mean_extreme specifications are retained as limited combined sentiment settings for RQ3."
+  },
+  "lag_policy": {
+    "rule": "All predictors are lagged by one trading day.",
+    "rationale": [
+      "preserve temporal ordering",
+      "avoid look-ahead bias",
+      "keep macro and sentiment timing consistent"
+    ]
+  },
+  "preprocessing_rules": {
+    "standardization": "Fit on training data only and apply fitted parameters to validation/test data.",
+    "random_split_allowed": false
+  },
+  "benchmark_status": {
+    "proposal_statement": "The lagged target term is mentioned in the proposal as a benchmark predictor.",
+    "included_in_primary_feature_settings": false,
+    "final_decision": "The lagged target is documented as a possible benchmark idea, but it is not included in the final nine RQ-aligned primary feature specifications."
+  }
+}

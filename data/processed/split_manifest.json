@@ -1,0 +1,248 @@
+{
+  "version": "final_rq_aligned_daily_spec_v1",
+  "split_type": "chronological",
+  "train_period": {
+    "start": "2020-01-03",
+    "end": "2023-12-29",
+    "n_observations": 1005
+  },
+  "test_period": {
+    "start": "2024-01-02",
+    "end": "2024-12-31",
+    "n_observations": 252
+  },
+  "test_role": "strict out-of-sample hold-out set",
+  "random_split_allowed": false,
+  "cross_validation": {
+    "type": "expanding_window_time_series_cv",
+    "scope": "training set only",
+    "n_folds": 3,
+    "shuffle": false,
+    "future_information_allowed": false,
+    "fold_logic": [
+      "Fold 1: earliest training block -> next chronological validation block",
+      "Fold 2: expanded training block -> next chronological validation block",
+      "Fold 3: further expanded training block -> final chronological validation block before 2024"
+    ]
+  },
+  "preprocessing_scope": {
+    "train_test_stage": "Fit preprocessing on the full training set only, then transform the test set with the fitted training parameters.",
+    "cv_stage": "Within each CV fold, fit preprocessing only on the fold-specific training block and transform the fold-specific validation block."
+  },
+  "evaluation_metrics": {
+    "primary": [
+      "MAE",
+      "RMSE",
+      "R2"
+    ],
+    "incremental_value_metrics": {
+      "delta_MAE": "MAE(candidate_specification) - MAE(macro_only)",
+      "delta_RMSE": "RMSE(candidate_specification) - RMSE(macro_only)",
+      "delta_R2": "R2(candidate_specification) - R2(macro_only)",
+      "interpretation": {
+        "delta_MAE": "Negative values indicate lower error than the macro-only baseline.",
+        "delta_RMSE": "Negative values indicate lower error than the macro-only baseline.",
+        "delta_R2": "Positive values indicate higher explanatory performance than the macro-only baseline."
+      },
+      "rq3_candidate_specifications": [
+        "macro_mean",
+        "macro_std",
+        "macro_extreme",
+        "macro_mean_std",
+        "macro_mean_extreme"
+      ],
+      "reference_specification": "macro_only"
+    }
+  },
+  "primary_model_comparison_matrix": [
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_only",
+      "rq_role": "RQ1_macro_baseline",
+      "n_predictors": 2
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "sentiment_mean_only",
+      "rq_role": "RQ2_standalone_sentiment_direction",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "sentiment_std_only",
+      "rq_role": "RQ2_standalone_sentiment_dispersion",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "sentiment_extreme_only",
+      "rq_role": "RQ2_standalone_extreme_sentiment_share",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_mean",
+      "rq_role": "RQ3_incremental_sentiment_direction_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_std",
+      "rq_role": "RQ3_incremental_sentiment_dispersion_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_extreme",
+      "rq_role": "RQ3_incremental_extreme_sentiment_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_mean_std",
+      "rq_role": "RQ3_incremental_direction_and_dispersion_beyond_macro",
+      "n_predictors": 4
+    },
+    {
+      "model_type": "OLS",
+      "feature_setting": "macro_mean_extreme",
+      "rq_role": "RQ3_incremental_direction_and_extreme_sentiment_beyond_macro",
+      "n_predictors": 4
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_only",
+      "rq_role": "RQ1_macro_baseline",
+      "n_predictors": 2
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "sentiment_mean_only",
+      "rq_role": "RQ2_standalone_sentiment_direction",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "sentiment_std_only",
+      "rq_role": "RQ2_standalone_sentiment_dispersion",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "sentiment_extreme_only",
+      "rq_role": "RQ2_standalone_extreme_sentiment_share",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_mean",
+      "rq_role": "RQ3_incremental_sentiment_direction_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_std",
+      "rq_role": "RQ3_incremental_sentiment_dispersion_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_extreme",
+      "rq_role": "RQ3_incremental_extreme_sentiment_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_mean_std",
+      "rq_role": "RQ3_incremental_direction_and_dispersion_beyond_macro",
+      "n_predictors": 4
+    },
+    {
+      "model_type": "RandomForest",
+      "feature_setting": "macro_mean_extreme",
+      "rq_role": "RQ3_incremental_direction_and_extreme_sentiment_beyond_macro",
+      "n_predictors": 4
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_only",
+      "rq_role": "RQ1_macro_baseline",
+      "n_predictors": 2
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "sentiment_mean_only",
+      "rq_role": "RQ2_standalone_sentiment_direction",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "sentiment_std_only",
+      "rq_role": "RQ2_standalone_sentiment_dispersion",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "sentiment_extreme_only",
+      "rq_role": "RQ2_standalone_extreme_sentiment_share",
+      "n_predictors": 1
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_mean",
+      "rq_role": "RQ3_incremental_sentiment_direction_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_std",
+      "rq_role": "RQ3_incremental_sentiment_dispersion_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_extreme",
+      "rq_role": "RQ3_incremental_extreme_sentiment_beyond_macro",
+      "n_predictors": 3
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_mean_std",
+      "rq_role": "RQ3_incremental_direction_and_dispersion_beyond_macro",
+      "n_predictors": 4
+    },
+    {
+      "model_type": "XGBoost",
+      "feature_setting": "macro_mean_extreme",
+      "rq_role": "RQ3_incremental_direction_and_extreme_sentiment_beyond_macro",
+      "n_predictors": 4
+    }
+  ],
+  "model_selection_rule": {
+    "nonlinear_models": [
+      "RandomForest",
+      "XGBoost"
+    ],
+    "primary_selection_metric": "lowest mean cross-validation RMSE",
+    "tie_breaking_rule": [
+      "higher mean cross-validation R2",
+      "lower grid_order, corresponding to the simpler-first grid ordering"
+    ],
+    "reported_but_not_selection_metric": [
+      "mean cross-validation MAE"
+    ],
+    "test_set_usage": "The 2024 hold-out test set is not used for hyperparameter tuning."
+  },
+  "error_analysis_scope": [
+    "predicted_vs_actual",
+    "residuals_over_time",
+    "rolling_window_error_behavior",
+    "high_vix_regime_error",
+    "extreme_sentiment_regime_error"
+  ],
+  "interpretability_scope": {
+    "ols": "Coefficient signs, magnitude after standardization, and statistical uncertainty are reported cautiously.",
+    "tree_based_models": "SHAP is used for model-based predictive contribution, not causal interpretation.",
+    "shap_causal_warning": "SHAP values do not establish causal effects of macroeconomic or sentiment variables."
+  }
+}

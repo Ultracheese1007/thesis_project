@@ -1,0 +1,20 @@
+{
+  "raw_file": "data/raw/financial_news_2020_2024_full.csv",
+  "output_file": "data/processed/daily/daily_sentiment.csv",
+  "model_name": "ProsusAI/finbert",
+  "device": "cuda",
+  "csv_chunk_size": 20000,
+  "inference_batch_size": 64,
+  "max_length": 256,
+  "max_chunks": null,
+  "start_date": "2020-01-01 00:00:00+00:00",
+  "end_date": "2024-12-31 23:59:59+00:00",
+  "date_column": "date",
+  "title_column": null,
+  "text_column": "text",
+  "total_rows_seen": 1978497,
+  "total_rows_used": 1978471,
+  "n_daily_observations": 1817,
+  "date_min": "2020-01-01 00:00:00",
+  "date_max": "2024-12-31 00:00:00"
+}
