@@ -1,0 +1,6 @@
+component,row_count,date_min,date_max,note
+nasdaq_master_calendar,1258,2020-01-02,2024-12-31,Master calendar based on trading days with valid NASDAQ close.
+dgs10_source,1304,2020-01-02,2024-12-31,"Merged by exact date onto master calendar, then forward-filled."
+vix_source,1304,2020-01-02,2024-12-31,"Merged by exact date onto master calendar, then forward-filled."
+sentiment_source,1817,2020-01-01,2024-12-31,Merged by exact date onto trading-day panel; missing trading-day sentiment filled with 0.
+merged_daily_base,1258,2020-01-02,2024-12-31,"Trading-day master panel preserved. Rows before merge = 1258, after merge = 1258."

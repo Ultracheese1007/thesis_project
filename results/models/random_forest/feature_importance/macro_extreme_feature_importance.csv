@@ -1,0 +1,4 @@
+feature,importance,model_family,spec
+vix_lag1,0.5937241489193565,random_forest,macro_extreme
+sentiment_extreme_lag1,0.24969669044188728,random_forest,macro_extreme
+dgs10_lag1,0.15657916063875615,random_forest,macro_extreme

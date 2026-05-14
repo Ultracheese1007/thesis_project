@@ -1,0 +1,12 @@
+{
+  "model_family": "random_forest",
+  "spec": "macro_only",
+  "feature_spec_role": "RQ1_macro_baseline",
+  "best_params": {
+    "n_estimators": 300,
+    "max_depth": 4,
+    "min_samples_leaf": 1
+  },
+  "cv_mean_rmse": 0.014902984020746772,
+  "cv_mean_r2": -0.069473816190239
+}

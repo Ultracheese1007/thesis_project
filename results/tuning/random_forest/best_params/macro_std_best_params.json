@@ -1,0 +1,12 @@
+{
+  "model_family": "random_forest",
+  "spec": "macro_std",
+  "feature_spec_role": "RQ3_incremental_sentiment_beyond_macro",
+  "best_params": {
+    "n_estimators": 300,
+    "max_depth": 4,
+    "min_samples_leaf": 1
+  },
+  "cv_mean_rmse": 0.014748445917796914,
+  "cv_mean_r2": -0.04160960976011944
+}

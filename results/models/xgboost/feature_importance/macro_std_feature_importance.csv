@@ -1,0 +1,4 @@
+feature,importance,model_family,spec
+vix_lag1,0.3551745,xgboost,macro_std
+dgs10_lag1,0.34421048,xgboost,macro_std
+sentiment_std_lag1,0.30061495,xgboost,macro_std

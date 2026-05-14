@@ -5,6 +5,7 @@ from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
+from scipy.stats import skew, kurtosis
 import matplotlib.pyplot as plt
 
 
@@ -415,6 +416,16 @@ def build_summary_statistics(final_df: pd.DataFrame) -> pd.DataFrame:
         "sentiment_extreme_lag1",
     ]
     summary = final_df[cols].describe().T.reset_index().rename(columns={"index": "variable"})
+
+    # Add skewness and biased excess kurtosis as descriptive shape measures.
+    # These are reported in Table 3.2 to characterize the distribution shape
+    # of the target variable and lagged predictors.
+    # bias=True follows scipy's default and matches the thesis table values.
+    skew_values = [skew(final_df[c].dropna(), bias=True) for c in cols]
+    kurt_values = [kurtosis(final_df[c].dropna(), bias=True) for c in cols]
+    summary["skew"] = skew_values
+    summary["excess_kurtosis"] = kurt_values
+
     return summary
 
 

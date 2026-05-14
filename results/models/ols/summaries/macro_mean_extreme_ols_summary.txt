@@ -1,0 +1,28 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          nasdaq_return   R-squared:                       0.006
+Model:                            OLS   Adj. R-squared:                  0.002
+Method:                 Least Squares   F-statistic:                     1.464
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):              0.211
+Time:                        20:41:32   Log-Likelihood:                 2643.9
+No. Observations:                1005   AIC:                            -5278.
+Df Residuals:                    1000   BIC:                            -5253.
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+==========================================================================================
+                             coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+const                      0.0006      0.001      1.155      0.248      -0.000       0.002
+dgs10_lag1             -2.473e-05      0.001     -0.041      0.968      -0.001       0.001
+vix_lag1                   0.0008      0.001      1.178      0.239      -0.001       0.002
+sentiment_mean_lag1       -0.0011      0.001     -1.833      0.067      -0.002    7.66e-05
+sentiment_extreme_lag1    -0.0003      0.001     -0.477      0.633      -0.002       0.001
+==============================================================================
+Omnibus:                      212.622   Durbin-Watson:                   2.295
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1738.156
+Skew:                          -0.727   Prob(JB):                         0.00
+Kurtosis:                       9.276   Cond. No.                         1.88
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

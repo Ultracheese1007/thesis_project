@@ -1,0 +1,2 @@
+model_family,spec,feature_spec_role,n_features,feature_list,cv_mean_mae,cv_std_mae,cv_mean_rmse,cv_std_rmse,cv_mean_r2,cv_std_r2,train_mae,train_rmse,train_r2,test_mae,test_rmse,test_r2
+historical_mean,historical_mean,naive_baseline,0,<none>,0.011448710083253594,0.004437381695886028,0.014591726208175365,0.005243104986867282,-0.012392596803555497,0.009208154096373357,0.012370016313726941,0.017478914982009534,0.0,0.008548243971143519,0.011478692023032028,-0.00045523822369064604

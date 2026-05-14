@@ -1,0 +1,4 @@
+feature,importance,model_family,spec,feature_spec_role
+vix_lag1,0.587662586145932,random_forest,macro_std,RQ3_incremental_sentiment_beyond_macro
+dgs10_lag1,0.2336589693516733,random_forest,macro_std,RQ3_incremental_sentiment_beyond_macro
+sentiment_std_lag1,0.1786784445023946,random_forest,macro_std,RQ3_incremental_sentiment_beyond_macro

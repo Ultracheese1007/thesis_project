@@ -1,0 +1,5 @@
+feature,importance,model_family,spec,feature_spec_role
+sentiment_mean_lag1,0.31394047,xgboost,macro_mean_extreme,RQ3_incremental_sentiment_beyond_macro
+vix_lag1,0.27778822,xgboost,macro_mean_extreme,RQ3_incremental_sentiment_beyond_macro
+dgs10_lag1,0.20674658,xgboost,macro_mean_extreme,RQ3_incremental_sentiment_beyond_macro
+sentiment_extreme_lag1,0.20152473,xgboost,macro_mean_extreme,RQ3_incremental_sentiment_beyond_macro

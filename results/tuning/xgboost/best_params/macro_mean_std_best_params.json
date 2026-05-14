@@ -1,0 +1,12 @@
+{
+  "model_family": "xgboost",
+  "spec": "macro_mean_std",
+  "feature_spec_role": "RQ3_incremental_sentiment_beyond_macro",
+  "best_params": {
+    "n_estimators": 100,
+    "learning_rate": 0.03,
+    "max_depth": 2
+  },
+  "cv_mean_rmse": 0.014829708889902543,
+  "cv_mean_r2": -0.054571773900460085
+}

@@ -1,0 +1,2 @@
+feature,importance,model_family,spec
+sentiment_mean_lag1,1.0,random_forest,sentiment_mean_only

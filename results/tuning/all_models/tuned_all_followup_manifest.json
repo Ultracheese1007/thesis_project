@@ -1,0 +1,83 @@
+{
+  "script": "run_day3_tuned_all_followup.py",
+  "purpose": "Generate full tuned nonlinear delta table, SHAP outputs, and error-analysis outputs for all tuned nonlinear feature specifications.",
+  "train_path": "/Users/leah/Desktop/thesis_project/data/processed/train_daily.csv",
+  "test_path": "/Users/leah/Desktop/thesis_project/data/processed/test_daily.csv",
+  "tuned_master_path": "/Users/leah/Desktop/thesis_project/results/tuning/comparison/tuned_nonlinear_master_metrics.csv",
+  "tuned_best_params_path": "/Users/leah/Desktop/thesis_project/results/tuning/comparison/tuned_best_params_summary.csv",
+  "outputs": {
+    "tuned_delta_vs_macro_only": "/Users/leah/Desktop/thesis_project/results/tuning/comparison/tuned_nonlinear_delta_vs_macro_only.csv",
+    "predictions_all": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/error_analysis/tuned_predictions_all.csv",
+    "residuals_over_time": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/error_analysis/tuned_residuals_over_time.csv",
+    "regime_error_summary": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/error_analysis/tuned_regime_error_summary.csv",
+    "rolling_error_summary": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/error_analysis/tuned_rolling_error_summary.csv",
+    "shap_values_all": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/shap/tuned_shap_values.csv",
+    "mean_abs_shap_summary": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/shap/tuned_mean_abs_shap_summary.csv",
+    "individual_shap_values_dir": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/shap/values",
+    "shap_plots_dir": "/Users/leah/Desktop/thesis_project/results/tuning/all_models/shap/plots"
+  },
+  "feature_specs": {
+    "macro_only": [
+      "dgs10_lag1",
+      "vix_lag1"
+    ],
+    "sentiment_mean_only": [
+      "sentiment_mean_lag1"
+    ],
+    "sentiment_std_only": [
+      "sentiment_std_lag1"
+    ],
+    "sentiment_extreme_only": [
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1"
+    ],
+    "macro_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_mean_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_extreme_lag1"
+    ]
+  },
+  "feature_spec_roles": {
+    "macro_only": "RQ1_macro_baseline",
+    "sentiment_mean_only": "RQ2_standalone_sentiment",
+    "sentiment_std_only": "RQ2_standalone_sentiment",
+    "sentiment_extreme_only": "RQ2_standalone_sentiment",
+    "macro_mean": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_std": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_extreme": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_mean_std": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_mean_extreme": "RQ3_incremental_sentiment_beyond_macro"
+  },
+  "rq3_incremental_specs": [
+    "macro_extreme",
+    "macro_mean",
+    "macro_mean_extreme",
+    "macro_mean_std",
+    "macro_std"
+  ],
+  "interpretation_note": "All tuned nonlinear specifications are processed for transparency. The thesis text should report cross-model patterns and RQ-relevant findings, rather than mechanically discussing every SHAP plot or error-analysis row.",
+  "delta_interpretation": "The tuned nonlinear delta table is restricted to RQ3 macro-sentiment specifications. RQ2 standalone sentiment specifications are excluded from the incremental delta table because they do not add sentiment to the macro-only baseline.",
+  "rolling_window": 20,
+  "random_state": 42
+}

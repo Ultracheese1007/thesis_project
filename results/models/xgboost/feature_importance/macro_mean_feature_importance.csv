@@ -1,0 +1,4 @@
+feature,importance,model_family,spec
+vix_lag1,0.3606383,xgboost,macro_mean
+dgs10_lag1,0.32275653,xgboost,macro_mean
+sentiment_mean_lag1,0.31660518,xgboost,macro_mean

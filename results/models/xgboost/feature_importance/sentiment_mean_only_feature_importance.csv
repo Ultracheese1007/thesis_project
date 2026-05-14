@@ -1,0 +1,2 @@
+feature,importance,model_family,spec
+sentiment_mean_lag1,1.0,xgboost,sentiment_mean_only

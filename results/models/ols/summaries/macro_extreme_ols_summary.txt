@@ -1,0 +1,27 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          nasdaq_return   R-squared:                       0.002
+Model:                            OLS   Adj. R-squared:                 -0.001
+Method:                 Least Squares   F-statistic:                    0.8296
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):              0.478
+Time:                        20:41:32   Log-Likelihood:                 2642.2
+No. Observations:                1005   AIC:                            -5276.
+Df Residuals:                    1001   BIC:                            -5257.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==========================================================================================
+                             coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+const                      0.0006      0.001      1.154      0.249      -0.000       0.002
+dgs10_lag1              2.792e-05      0.001      0.046      0.964      -0.001       0.001
+vix_lag1                   0.0009      0.001      1.335      0.182      -0.000       0.002
+sentiment_extreme_lag1  4.851e-05      0.001      0.081      0.936      -0.001       0.001
+==============================================================================
+Omnibus:                      205.831   Durbin-Watson:                   2.339
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1664.770
+Skew:                          -0.698   Prob(JB):                         0.00
+Kurtosis:                       9.149   Cond. No.                         1.78
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

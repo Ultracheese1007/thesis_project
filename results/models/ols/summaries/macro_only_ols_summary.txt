@@ -1,0 +1,26 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          nasdaq_return   R-squared:                       0.002
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     1.242
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):              0.289
+Time:                        20:41:32   Log-Likelihood:                 2642.2
+No. Observations:                1005   AIC:                            -5278.
+Df Residuals:                    1002   BIC:                            -5264.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0006      0.001      1.155      0.248      -0.000       0.002
+dgs10_lag1  3.917e-05      0.001      0.066      0.947      -0.001       0.001
+vix_lag1       0.0009      0.001      1.486      0.138      -0.000       0.002
+==============================================================================
+Omnibus:                      205.953   Durbin-Watson:                   2.340
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1665.843
+Skew:                          -0.699   Prob(JB):                         0.00
+Kurtosis:                       9.150   Cond. No.                         1.48
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

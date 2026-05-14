@@ -1,0 +1,12 @@
+{
+  "model_family": "random_forest",
+  "spec": "sentiment_mean_only",
+  "feature_spec_role": "RQ2_standalone_sentiment",
+  "best_params": {
+    "n_estimators": 300,
+    "max_depth": 4,
+    "min_samples_leaf": 1
+  },
+  "cv_mean_rmse": 0.015090358287091132,
+  "cv_mean_r2": -0.09937755146175127
+}

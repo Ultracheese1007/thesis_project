@@ -1,0 +1,27 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          nasdaq_return   R-squared:                       0.006
+Model:                            OLS   Adj. R-squared:                  0.003
+Method:                 Least Squares   F-statistic:                     1.877
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):              0.132
+Time:                        20:41:32   Log-Likelihood:                 2643.8
+No. Observations:                1005   AIC:                            -5280.
+Df Residuals:                    1001   BIC:                            -5260.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+=======================================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+const                   0.0006      0.001      1.156      0.248      -0.000       0.002
+dgs10_lag1          -8.398e-05      0.001     -0.141      0.888      -0.001       0.001
+vix_lag1                0.0007      0.001      1.080      0.281      -0.001       0.002
+sentiment_mean_lag1    -0.0010      0.001     -1.772      0.077      -0.002       0.000
+==============================================================================
+Omnibus:                      211.410   Durbin-Watson:                   2.293
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1725.822
+Skew:                          -0.722   Prob(JB):                         0.00
+Kurtosis:                       9.255   Cond. No.                         1.57
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

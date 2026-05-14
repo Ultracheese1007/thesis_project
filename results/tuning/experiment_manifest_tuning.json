@@ -1,0 +1,139 @@
+{
+  "train_path": "/Users/leah/Desktop/thesis_project/data/processed/train_daily.csv",
+  "test_path": "/Users/leah/Desktop/thesis_project/data/processed/test_daily.csv",
+  "train_start": "2020-01-03",
+  "train_end": "2023-12-29",
+  "test_start": "2024-01-02",
+  "test_end": "2024-12-31",
+  "n_train": 1005,
+  "n_test": 252,
+  "cv_type": "expanding_window",
+  "n_splits": 3,
+  "feature_specs": {
+    "macro_only": [
+      "dgs10_lag1",
+      "vix_lag1"
+    ],
+    "sentiment_mean_only": [
+      "sentiment_mean_lag1"
+    ],
+    "sentiment_std_only": [
+      "sentiment_std_lag1"
+    ],
+    "sentiment_extreme_only": [
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1"
+    ],
+    "macro_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_extreme_lag1"
+    ],
+    "macro_mean_std": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_std_lag1"
+    ],
+    "macro_mean_extreme": [
+      "dgs10_lag1",
+      "vix_lag1",
+      "sentiment_mean_lag1",
+      "sentiment_extreme_lag1"
+    ]
+  },
+  "feature_spec_roles": {
+    "macro_only": "RQ1_macro_baseline",
+    "sentiment_mean_only": "RQ2_standalone_sentiment",
+    "sentiment_std_only": "RQ2_standalone_sentiment",
+    "sentiment_extreme_only": "RQ2_standalone_sentiment",
+    "macro_mean": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_std": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_extreme": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_mean_std": "RQ3_incremental_sentiment_beyond_macro",
+    "macro_mean_extreme": "RQ3_incremental_sentiment_beyond_macro"
+  },
+  "rq_mapping": {
+    "RQ1": {
+      "purpose": "macroeconomic predictive power",
+      "feature_settings": [
+        "macro_only"
+      ]
+    },
+    "RQ2": {
+      "purpose": "standalone sentiment predictive power",
+      "feature_settings": [
+        "sentiment_mean_only",
+        "sentiment_std_only",
+        "sentiment_extreme_only"
+      ],
+      "interpretation_note": "These specifications test each FinBERT-based sentiment representation as a standalone predictor. In nonlinear models, they are interpreted as one-dimensional nonlinear or threshold-type signal tests, not as interaction models."
+    },
+    "RQ3": {
+      "purpose": "incremental sentiment value beyond macro baseline",
+      "feature_settings": [
+        "macro_mean",
+        "macro_std",
+        "macro_extreme",
+        "macro_mean_std",
+        "macro_mean_extreme"
+      ],
+      "reference_setting": "macro_only"
+    }
+  },
+  "collinearity_design_note": "The tuning design follows the same feature-setting matrix as the fixed-parameter experiments. A full combined specification containing sentiment_mean_lag1, sentiment_std_lag1, and sentiment_extreme_lag1 together with macro predictors is not used as a primary setting, because sentiment_std_lag1 and sentiment_extreme_lag1 show high pairwise correlation and may capture overlapping sentiment-intensity information.",
+  "rf_grid": {
+    "n_estimators": [
+      100,
+      300
+    ],
+    "max_depth": [
+      4,
+      6,
+      8
+    ],
+    "min_samples_leaf": [
+      5,
+      3,
+      1
+    ]
+  },
+  "xgb_grid": {
+    "n_estimators": [
+      100,
+      300
+    ],
+    "learning_rate": [
+      0.05,
+      0.03
+    ],
+    "max_depth": [
+      2,
+      3,
+      4
+    ]
+  },
+  "xgb_fixed_params": {
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0,
+    "objective": "reg:squarederror",
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "random_state": 42,
+  "selection_rule": {
+    "primary": "lowest cv_mean_rmse",
+    "secondary": "higher cv_mean_r2",
+    "tertiary": "lower grid_order (simpler-first)"
+  }
+}
