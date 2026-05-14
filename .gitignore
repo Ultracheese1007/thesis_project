@@ -17,3 +17,9 @@ venv/
 
 # Logs
 *.log
+
+# Local Python virtual environments
+thesis_daily_env/
+.venv/
+venv/
+env/
