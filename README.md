@@ -8,11 +8,11 @@ Master thesis empirical pipeline. The project evaluates whether daily institutio
 
 The empirical design is structured around three research questions, each mapped to a fixed set of feature specifications (see `docs/model_info_sheet.md` for the authoritative spec).
 
-- **RQ1 — Macro baseline.** Do macro-financial indicators (10-year Treasury yield, VIX) carry predictive information for next-day NASDAQ-100 log returns?
-- **RQ2 — Standalone sentiment.** Do FinBERT-based institutional sentiment representations (direction, dispersion, extreme share) carry standalone predictive information?
-- **RQ3 — Incremental value.** Do sentiment features add predictive value *on top of* the macro baseline, measured by `delta_MAE`, `delta_RMSE`, and `delta_R2` against `macro_only`?
+- **RQ1 — Macro baseline.** To what extent can macroeconomic indicators (DGS10, VIX) explain or predict the daily returns of AI technology stocks? Do predictive performances differ between linear (OLS) and nonlinear (XGBoost) models?
+- **RQ2 — Standalone sentiment.** To what extent can the institutional sentiment index constructed using FinBERT predict the daily returns of AI technology stocks? How does it perform as a single feature in OLS and XGBoost models?
+- **RQ3 — Incremental value.** When macroeconomic indicators and institutional sentiment features are simultaneously incorporated into the predictive model, does its predictive performance significantly improve relative to single-feature models (e.g., via ΔR² or ΔMAE)? Within the SHAP framework, how do the relative contributions of macroeconomic and sentiment features differ?
 
-The target is `nasdaq_return`, the daily log return of the NASDAQ-100 index. All predictors are lagged one trading day to avoid look-ahead bias.
+The AI technology stock narrative motivates the research context. The formal empirical target is `nasdaq_return`, the daily log return of the NASDAQ-100 index, which serves as a liquid, observable proxy for the AI-tech-heavy large-cap segment. All predictors are lagged one trading day to avoid look-ahead bias.
 
 ---
 
@@ -152,7 +152,7 @@ python src/build_figure_4_1.py
 - **Cross-validation:** expanding-window `TimeSeriesSplit` with `n_splits = 3`, fit on training data only.
 - **Standardization:** fit on the training fold only, applied to the validation/test fold. Never fit on the full dataset.
 - **Hyperparameter selection:** lowest mean CV RMSE, tie-broken by higher mean CV R² and then by lower `grid_order`. The 2024 hold-out is never used for selection.
-- **Metrics:** MAE, RMSE, R² on CV / train / test. For RQ3, delta metrics are computed against the `macro_only` reference within the same model family.
+- **Metrics:** MAE, RMSE, R² on CV / train / test. For RQ3, delta metrics (ΔMAE, ΔRMSE, ΔR²) are computed against the `macro_only` reference within the same model family, quantifying the incremental value of adding sentiment features on top of the macro baseline.
 - **SHAP:** computed for tuned nonlinear models on the test set. Read as model-attribution, not causal effect.
 
 Leakage controls are documented in `results/sanity_checks/leakage_checks.md` and are encoded directly into the pipeline (lag-after-align, fit-scaler-on-train-only, no random shuffling anywhere).
